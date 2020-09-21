@@ -17,26 +17,25 @@ import java.util.concurrent.ExecutorService;
  * TODO: Update one line description above what the component does.
  */
 @UriEndpoint(firstVersion = "0.1.1", scheme = "cloudstate", title = "Cloudstate", syntax="cloudstate:name",
-             consumerClass = CloudstateConsumer.class, label = "custom")
-public class CloudstateEndpoint extends DefaultEndpoint {
+             consumerClass = CloudStateConsumer.class, label = "custom")
+public class CloudStateEndpoint extends DefaultEndpoint {
     @UriPath @Metadata(required = true)
     private String name;
     @UriParam(defaultValue = "10")
     private int option = 10;
 
-    public CloudstateEndpoint() {
-    }
+    public CloudStateEndpoint() {}
 
-    public CloudstateEndpoint(String uri, CloudstateComponent component) {
+    public CloudStateEndpoint(String uri, CloudStateComponent component) {
         super(uri, component);
     }
 
     public Producer createProducer() throws Exception {
-        return new CloudstateProducer(this);
+        return new CloudStateProducer(this);
     }
 
     public Consumer createConsumer(Processor processor) throws Exception {
-        Consumer consumer = new CloudstateConsumer(this, processor);
+        Consumer consumer = new CloudStateConsumer(this, processor);
         configureConsumer(consumer);
         return consumer;
     }
@@ -65,6 +64,6 @@ public class CloudstateEndpoint extends DefaultEndpoint {
 
     public ExecutorService createExecutor() {
         // TODO: Delete me when you implementy your custom component
-        return getCamelContext().getExecutorServiceManager().newSingleThreadExecutor(this, "CloudstateConsumer");
+        return getCamelContext().getExecutorServiceManager().newSingleThreadExecutor(this, "CloudStateConsumer");
     }
 }

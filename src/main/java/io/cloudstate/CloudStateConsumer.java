@@ -2,18 +2,17 @@ package io.cloudstate;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.support.DefaultConsumer;
 
 import java.util.concurrent.ExecutorService;
 
-public class CloudstateConsumer extends DefaultConsumer {
-    private final CloudstateEndpoint endpoint;
+public class CloudStateConsumer extends DefaultConsumer {
+    private final CloudStateEndpoint endpoint;
     private final EventBusHelper eventBusHelper;
 
     private ExecutorService executorService;
 
-    public CloudstateConsumer(CloudstateEndpoint endpoint, Processor processor) {
+    public CloudStateConsumer(CloudStateEndpoint endpoint, Processor processor) {
         super(endpoint, processor);
         this.endpoint = endpoint;
         eventBusHelper = EventBusHelper.getInstance();

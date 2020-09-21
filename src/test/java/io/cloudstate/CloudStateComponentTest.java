@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CloudstateComponentTest extends CamelTestSupport {
+public class CloudStateComponentTest extends CamelTestSupport {
 
     private final EventBusHelper eventBusHelper = EventBusHelper.getInstance();
 
