@@ -29,6 +29,7 @@ public class CloudStateEndpointConfigurer extends PropertyConfigurerSupport impl
         case "exchangePattern": target.setExchangePattern(property(camelContext, org.apache.camel.ExchangePattern.class, value)); return true;
         case "lazystartproducer":
         case "lazyStartProducer": target.setLazyStartProducer(property(camelContext, boolean.class, value)); return true;
+        case "option": target.setOption(property(camelContext, int.class, value)); return true;
         case "synchronous": target.setSynchronous(property(camelContext, boolean.class, value)); return true;
         default: return false;
         }
@@ -42,6 +43,7 @@ public class CloudStateEndpointConfigurer extends PropertyConfigurerSupport impl
         answer.put("exceptionHandler", org.apache.camel.spi.ExceptionHandler.class);
         answer.put("exchangePattern", org.apache.camel.ExchangePattern.class);
         answer.put("lazyStartProducer", boolean.class);
+        answer.put("option", int.class);
         answer.put("synchronous", boolean.class);
         return answer;
     }
@@ -60,6 +62,7 @@ public class CloudStateEndpointConfigurer extends PropertyConfigurerSupport impl
         case "exchangePattern": return target.getExchangePattern();
         case "lazystartproducer":
         case "lazyStartProducer": return target.isLazyStartProducer();
+        case "option": return target.getOption();
         case "synchronous": return target.isSynchronous();
         default: return null;
         }

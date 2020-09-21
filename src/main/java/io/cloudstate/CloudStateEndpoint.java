@@ -4,10 +4,8 @@ import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
 import org.apache.camel.Producer;
 import org.apache.camel.support.DefaultEndpoint;
-import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
-import org.apache.camel.spi.UriPath;
 
 import java.util.concurrent.ExecutorService;
 
@@ -15,20 +13,18 @@ import java.util.concurrent.ExecutorService;
  * Cloudstate Camel component support.
  *
  */
-@UriEndpoint(firstVersion = "0.1.1", scheme = "cloudstate", title = "Cloudstate", syntax="cloudstate:entityType",
+@UriEndpoint(firstVersion = "0.1.1", scheme = "cloudstate", title = "Cloudstate", syntax="cloudstate:entityType/action/command",
              consumerClass = CloudStateConsumer.class, label = "custom")
 public class CloudStateEndpoint extends DefaultEndpoint {
 
-    @UriPath @Metadata(required = true)
-    private String entityType;
-
-    @UriParam(defaultValue = "10")
-    private int option = 10;
+    @UriParam
+    private EntityConfiguration configuration;
 
     public CloudStateEndpoint() {}
 
-    public CloudStateEndpoint(String uri, CloudStateComponent component) {
+    public CloudStateEndpoint(String uri, CloudStateComponent component, EntityConfiguration configuration) {
         super(uri, component);
+        this.configuration = configuration;
     }
 
     public Producer createProducer() throws Exception {
@@ -42,25 +38,14 @@ public class CloudStateEndpoint extends DefaultEndpoint {
     }
 
     /**
-     * Some description of this option, and what it does
+     * The component configurations
      */
-    public void setEntityType(String entityType) {
-        this.entityType = entityType;
+    public EntityConfiguration getConfiguration() {
+        return configuration;
     }
 
-    public String getEntityType() {
-        return entityType;
-    }
-
-    /**
-     * Some description of this option, and what it does
-     */
-    public void setOption(int option) {
-        this.option = option;
-    }
-
-    public int getOption() {
-        return option;
+    public void setConfiguration(EntityConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     public ExecutorService createExecutor() {
