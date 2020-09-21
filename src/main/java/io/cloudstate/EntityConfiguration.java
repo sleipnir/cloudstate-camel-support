@@ -1,6 +1,7 @@
 
 package io.cloudstate;
 
+import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriParams;
@@ -55,6 +56,14 @@ public class EntityConfiguration implements Cloneable {
 
     public String getCommand() {
         return command;
+    }
+
+    public EntityConfiguration copy() {
+        try {
+            return (EntityConfiguration) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeCamelException(e);
+        }
     }
 
 }
