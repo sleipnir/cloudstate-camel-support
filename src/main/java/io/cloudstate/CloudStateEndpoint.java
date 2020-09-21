@@ -12,15 +12,16 @@ import org.apache.camel.spi.UriPath;
 import java.util.concurrent.ExecutorService;
 
 /**
- * Cloudstate component which does bla bla.
+ * Cloudstate Camel component support.
  *
- * TODO: Update one line description above what the component does.
  */
-@UriEndpoint(firstVersion = "0.1.1", scheme = "cloudstate", title = "Cloudstate", syntax="cloudstate:name",
+@UriEndpoint(firstVersion = "0.1.1", scheme = "cloudstate", title = "Cloudstate", syntax="cloudstate:entityType",
              consumerClass = CloudStateConsumer.class, label = "custom")
 public class CloudStateEndpoint extends DefaultEndpoint {
+
     @UriPath @Metadata(required = true)
-    private String name;
+    private String entityType;
+
     @UriParam(defaultValue = "10")
     private int option = 10;
 
@@ -43,12 +44,12 @@ public class CloudStateEndpoint extends DefaultEndpoint {
     /**
      * Some description of this option, and what it does
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setEntityType(String entityType) {
+        this.entityType = entityType;
     }
 
-    public String getName() {
-        return name;
+    public String getEntityType() {
+        return entityType;
     }
 
     /**
